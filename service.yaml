@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-website-service
+spec:
+  selector:
+    app: my-website  # Match the label in the Deployment
+  ports:
+    - protocol: TCP
+      port: 80         # The internal service port
+      targetPort: 80   # The port inside the container that the app listens on
+      nodePort: 30088  # The NodePort (must be within the 30000-32767 range)
+  type: NodePort  # Expose your app as a NodePort
