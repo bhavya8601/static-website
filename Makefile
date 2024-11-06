@@ -47,8 +47,10 @@ install-apache:
 
 # Step 2: Build the Docker image
 build-docker:
-	@echo "Building Docker image..."
-	docker build -t $(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG) .
+	echo "Anupom@1234" | docker login -u anupkrishna2000 --password-stdin
+	docker build -t exam:v1 .
+	docker tag exam:v1 anupkrishna2000/exam:v1
+	docker push anupkrishna2000/exam:v1
 
 # Step 3: Push the Docker image to Docker Hub
 push-docker:
@@ -57,8 +59,8 @@ push-docker:
 
 # Step 4: Run the Docker container
 run-docker:
-	@echo "Running Docker container..."
-	docker run -d -p 8888:80 $(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)
+	docker rm -f $(docker ps -a -q)
+	docker run -d -p 8888:80 anupkrishna2000/exam:v1
 
 # Step 5: Kubernetes Deployment
 deploy-k8s:
