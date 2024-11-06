@@ -1,5 +1,3 @@
-# Makefile to automate Apache2 setup, Docker and Kubernetes tasks
-
 # Variables
 APACHE_DIR=/var/www/html
 WEBSITE_SRC=~/static-website
@@ -47,20 +45,23 @@ install-apache:
 
 # Step 2: Build the Docker image
 build-docker:
-	echo "Anupom@1234" | docker login -u anupkrishna2000 --password-stdin
-	docker build -t exam:v1 .
-	docker tag exam:v1 anupkrishna2000/exam:v1
-	docker push anupkrishna2000/exam:v1
+	@echo "Logging in to Docker Hub..."
+	@echo "Anupom@1234" | docker login -u anupkrishna2000 --password-stdin
+	@echo "Building Docker image..."
+	docker build -t $(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG) .
+	docker tag $(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG) anupkrishna2000/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)
 
 # Step 3: Push the Docker image to Docker Hub
 push-docker:
 	@echo "Pushing Docker image to Docker Hub..."
-	docker push $(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)
+	docker push anupkrishna2000/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)
 
 # Step 4: Run the Docker container
 run-docker:
+	@echo "Removing all running Docker containers..."
 	docker rm -f $(docker ps -a -q)
-	docker run -d -p 8888:80 anupkrishna2000/exam:v1
+	@echo "Running Docker container..."
+	docker run -d -p 8888:80 anupkrishna2000/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)
 
 # Step 5: Kubernetes Deployment
 deploy-k8s:
@@ -80,4 +81,3 @@ clean-docker-containers:
 
 # All steps in sequence
 all: install-apache build-docker push-docker run-docker deploy-k8s expose-k8s
-
