@@ -4,155 +4,224 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My eCommerce Website</title>
+    <title>Stock Market Dashboard</title>
     <style>
+        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-        }
-        
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-        
-        header h1 {
-            margin: 0;
-        }
-
-        nav {
-            text-align: center;
-            background-color: #444;
-            padding: 10px 0;
-        }
-        
-        nav a {
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-        }
-
-        nav a:hover {
-            background-color: #ddd;
+            background-color: #f4f7fc;
             color: #333;
         }
 
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+        h1, h2 {
+            margin: 0;
         }
 
-        .product {
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: #2d3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #34495e;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.1em;
+        }
+
+        nav a:hover {
+            background-color: #1abc9c;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 30%;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #16a085;
+        }
+
+        /* Stock Summary */
+        .stock-summary {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+
+        .summary-card {
             background-color: white;
             border-radius: 8px;
             padding: 20px;
             width: 30%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary-card h2 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .summary-card p {
+            font-size: 1.2em;
+            color: #16a085;
+            margin: 10px 0;
+        }
+
+        /* Stock Ticker Section */
+        .stock-tickers {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .ticker-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            width: 22%;
             margin-bottom: 20px;
             text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .product img {
-            width: 100%;
-            border-radius: 8px;
+        .ticker-card h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
         }
 
-        .product h2 {
-            color: #333;
-            font-size: 1.5em;
-            margin: 10px 0;
-        }
-
-        .product p {
+        .ticker-card p {
             font-size: 1.2em;
-            color: #777;
-            margin: 10px 0;
+            color: #e74c3c;
         }
 
-        .product .price {
-            font-size: 1.5em;
-            color: #e91e63;
-            font-weight: bold;
+        .ticker-card .price-up {
+            color: #2ecc71;
         }
 
-        .product button {
-            background-color: #e91e63;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
+        .ticker-card .price-down {
+            color: #e74c3c;
         }
 
-        .product button:hover {
-            background-color: #d81b60;
-        }
-
+        /* Footer */
         footer {
-            background-color: #333;
+            background-color: #2d3e50;
             color: white;
-            padding: 10px 0;
+            padding: 20px;
             text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
         }
+
     </style>
 </head>
 <body>
 
     <header>
-        <h1>My eCommerce Store</h1>
+        <div class="container">
+            <h1>Stock Market Dashboard</h1>
+        </div>
     </header>
 
     <nav>
         <a href="#">Home</a>
-        <a href="#">Products</a>
-        <a href="#">Cart</a>
+        <a href="#">Stocks</a>
+        <a href="#">News</a>
+        <a href="#">Analysis</a>
         <a href="#">Contact</a>
     </nav>
 
+    <div class="search-bar">
+        <input type="text" id="stockSearch" placeholder="Search for a stock...">
+        <button onclick="alert('Search functionality is not connected.')">Search</button>
+    </div>
+
     <div class="container">
-        <!-- Product 1 -->
-        <div class="product">
-            <img src="https://via.placeholder.com/300x200" alt="Product 1">
-            <h2>Product Name 1</h2>
-            <p>This is a description of product 1.</p>
-            <div class="price">$19.99</div>
-            <button>Add to Cart</button>
+        <!-- Stock Summary -->
+        <div class="stock-summary">
+            <div class="summary-card">
+                <h2>Market Overview</h2>
+                <p>+2.45%</p>
+                <p>Dow Jones: 33,500</p>
+            </div>
+            <div class="summary-card">
+                <h2>NASDAQ</h2>
+                <p>+1.25%</p>
+                <p>NASDAQ: 13,450</p>
+            </div>
+            <div class="summary-card">
+                <h2>SP500</h2>
+                <p>+1.85%</p>
+                <p>SP500: 4,300</p>
+            </div>
         </div>
 
-        <!-- Product 2 -->
-        <div class="product">
-            <img src="https://via.placeholder.com/300x200" alt="Product 2">
-            <h2>Product Name 2</h2>
-            <p>This is a description of product 2.</p>
-            <div class="price">$29.99</div>
-            <button>Add to Cart</button>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product">
-            <img src="https://via.placeholder.com/300x200" alt="Product 3">
-            <h2>Product Name 3</h2>
-            <p>This is a description of product 3.</p>
-            <div class="price">$39.99</div>
-            <button>Add to Cart</button>
+        <!-- Stock Tickers -->
+        <div class="stock-tickers">
+            <div class="ticker-card">
+                <h3>Apple (AAPL)</h3>
+                <p class="price-up">$145.30 <span>+3.5%</span></p>
+            </div>
+            <div class="ticker-card">
+                <h3>Amazon (AMZN)</h3>
+                <p class="price-down">$2,850.45 <span>-1.2%</span></p>
+            </div>
+            <div class="ticker-card">
+                <h3>Google (GOOG)</h3>
+                <p class="price-up">$2,420.12 <span>+1.8%</span></p>
+            </div>
+            <div class="ticker-card">
+                <h3>Tesla (TSLA)</h3>
+                <p class="price-down">$675.40 <span>-0.5%</span></p>
+            </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 My eCommerce Store</p>
+        <p>&copy; 2024 Stock Market Dashboard. All rights reserved.</p>
     </footer>
 
 </body>
