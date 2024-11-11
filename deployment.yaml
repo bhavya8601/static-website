@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: my-website-container
-        image: anupkrishna2000/exam:v1
+        image: bsajmera/myapp:4
         ports:
         - containerPort: 80  # The port the container listens on
 
